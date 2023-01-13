@@ -7,6 +7,9 @@
   <br>
   TicoTacoTUÉ?
   <br>
+  <h3 align="center">
+  MOBILE SIDE
+  </h3>
 </h1>
 
 <h4 align="center">Project aimed at using 100% in Kotlin, both in the 'FrontEnd' with native Android in Kotlin, and in the Backend i've been using something that is widely used for microservices, i'm talking about  <a href="https://ktor.io/" target="_blank">Ktor</a>.</h4>
