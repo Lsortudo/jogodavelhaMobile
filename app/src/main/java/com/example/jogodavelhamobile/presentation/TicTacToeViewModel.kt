@@ -3,9 +3,11 @@ package com.example.jogodavelhamobile.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.jogodavelhamobile.data.GameState
+import com.example.jogodavelhamobile.data.Maketurn
 import com.example.jogodavelhamobile.data.RealTimeMessagingClient
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import java.net.ConnectException
 import javax.inject.Inject
 
@@ -28,6 +30,19 @@ class TicTacToeViewModel @Inject constructor(
     private val _showConnectionError = MutableStateFlow(false)
     val showConnectionError = _showConnectionError.asStateFlow()
 
+    fun finishTurn(x: Int, y: Int) {
+        if(state.value.field[y][x] != null || state.value.winningPlayer != null) {
+            return
+        }
+        viewModelScope.launch {
+            client.sendAction(Maketurn(x, y))
+        }
+    }
 
-
+    override fun onCleared() {
+        super.onCleared()
+        viewModelScope.launch {
+            client.close()
+        }
+    }
 }
