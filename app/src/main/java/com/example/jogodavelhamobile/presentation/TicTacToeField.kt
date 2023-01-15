@@ -46,6 +46,50 @@ private fun DrawScope.drawField() {
         strokeWidth = 3.dp.toPx(),
         cap = StrokeCap.Round
     )
+    //Second vertical line
+    drawLine(
+        color = Color.Black,
+        start = Offset(
+            x = size.width * (2 / 3f),
+            y = 0f
+        ),
+        end = Offset(
+            x = size.width * (2 / 3f),
+            y = size.height
+        ),
+        strokeWidth = 3.dp.toPx(),
+        cap = StrokeCap.Round
+    )
+    //First horizontal line
+    drawLine(
+        color = Color.Black,
+        start = Offset(
+            x = 0f,
+            y = size.height * (1 / 3f)
+        ),
+        end = Offset(
+            x = size.width,
+            y = size.height * (1 / 3f)
+        ),
+        strokeWidth = 3.dp.toPx(),
+        cap = StrokeCap.Round
+    )
+    //Second horizontal line
+    drawLine(
+        color = Color.Black,
+        start = Offset(
+            x = 0f,
+            y = size.height * (2 / 3f)
+        ),
+        end = Offset(
+            x = size.width,
+            y = size.height * (2 / 3f)
+        ),
+        strokeWidth = 3.dp.toPx(),
+        cap = StrokeCap.Round
+    )
+
+
 
 }
 
