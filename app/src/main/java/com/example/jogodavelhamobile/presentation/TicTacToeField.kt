@@ -5,9 +5,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jogodavelhamobile.data.GameState
@@ -27,7 +29,68 @@ fun TicTacToeField(
 
     Canvas(modifier = modifier) {
         drawField()
+        //Bellow u can change to drawX or drawO and will put an X/O on the middle
+        drawO(
+            color = playerXColor,
+            center = Offset(
+                x = size.width * (3 / 6f),
+                y = size.height * (3 / 6f),
+            )
+        )
     }
+
+}
+
+private fun DrawScope.drawO(
+    color: Color,
+    center: Offset,
+    size: Size = Size(50.dp.toPx(), 50.dp.toPx())
+){
+
+    drawCircle(
+        color = color,
+        center = center,
+        radius = size.width / 2,
+        style = Stroke(
+            width = 3.dp.toPx()
+        )
+    )
+
+}
+
+private fun DrawScope.drawX(
+    color: Color,
+    center: Offset,
+    size: Size = Size(50.dp.toPx(), 50.dp.toPx())
+    // Code above make relative in refactor
+) {
+    drawLine(
+        color = color,
+        start = Offset(
+            x = center.x - size.width / 2f,
+            y = center.y - size.height / 2f
+        ),
+        end = Offset(
+            x = center.x + size.width / 2f,
+            y = center.y + size.height / 2f
+        ),
+        strokeWidth = 3.dp.toPx(),
+        cap = StrokeCap.Round
+    )
+
+    drawLine(
+        color = color,
+        start = Offset(
+            x = center.x - size.width / 2f,
+            y = center.y + size.height / 2f
+        ),
+        end = Offset(
+            x = center.x + size.width / 2f,
+            y = center.y - size.height / 2f
+        ),
+        strokeWidth = 3.dp.toPx(),
+        cap = StrokeCap.Round
+    )
 
 }
 
@@ -90,20 +153,21 @@ private fun DrawScope.drawField() {
     )
 
 
-
 }
 
 @Preview(showBackground = true)
 @Composable
 fun TicTacToeFieldPreview() {
 
-    TicTacToeField(state = GameState(
-        field = arrayOf(
-            arrayOf('X', null, null),
-            arrayOf(null, 'O', 'O'),
-            arrayOf(null, null, null),
-        ),
-    ), onTapInField = { _, _ ->},
-    modifier = Modifier.size(300.dp))
-    
+    TicTacToeField(
+        state = GameState(
+            field = arrayOf(
+                arrayOf('X', null, null),
+                arrayOf(null, 'O', 'O'),
+                arrayOf(null, null, null),
+            ),
+        ), onTapInField = { _, _ -> },
+        modifier = Modifier.size(300.dp)
+    )
+
 }
