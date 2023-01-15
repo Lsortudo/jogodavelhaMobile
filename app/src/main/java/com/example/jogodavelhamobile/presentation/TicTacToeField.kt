@@ -30,13 +30,28 @@ fun TicTacToeField(
     Canvas(modifier = modifier) {
         drawField()
         //Bellow u can change to drawX or drawO and will put an X/O on the middle
-        drawO(
-            color = playerXColor,
-            center = Offset(
-                x = size.width * (3 / 6f),
-                y = size.height * (3 / 6f),
-            )
-        )
+        state.field.forEachIndexed{y, _ ->
+            state.field[y].forEachIndexed { x, player ->
+                val offset = Offset(
+                    x = x * size.width * (1 / 3f) + size.width / 6f,
+                    y = y * size.height * (1 / 3f) + size.height / 6f
+                // Code above is simple, 0 * everything = + it will be on the first row
+                // The code after + is just to divide by 6 to get the middle on each field
+                // Why 6? cuz the game has '3' lines, divided by 3, so middle = / 2, 3 * 2 = 6
+                )
+                if(player == 'X') {
+                    drawX(
+                        color = playerXColor,
+                        center = offset
+                    )
+                }else if (player == 'O') {
+                    drawO(
+                        color = playerOColor,
+                        center = offset
+                    )
+                }
+            }
+        }
     }
 
 }
