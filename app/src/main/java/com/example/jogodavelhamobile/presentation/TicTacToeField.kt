@@ -1,6 +1,7 @@
 package com.example.jogodavelhamobile.presentation
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.jogodavelhamobile.data.GameState
@@ -27,7 +29,15 @@ fun TicTacToeField(
 
 ) {
 
-    Canvas(modifier = modifier) {
+    Canvas(modifier = modifier
+        .pointerInput(true) {
+            detectTapGestures{
+                // Need to adapt, cuz it returns 1PX 3PX and i only need the numbers to call my fun onTapInField
+                val x = (3 * it.x.toInt() / size.width)
+                val y = (3 * it.y.toInt() / size.height)
+                onTapInField(x, y)
+            }
+        }) {
         drawField()
         //Bellow u can change to drawX or drawO and will put an X/O on the middle
         state.field.forEachIndexed{y, _ ->
