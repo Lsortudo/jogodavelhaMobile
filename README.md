@@ -31,6 +31,7 @@
   - Language that I'm really enjoying and being able to use it both in the backend and in the Mobile area ends up not only making it easier to use just one language, but also to learn even more about Kotlin.
 * Simple tic-tac-toe application between two players;
 * You can play online;
+* Using Jetpack Compose to use 100% Kotlin and also help with performance issues, for example with lists and the canvas;
 
 ## How To Use
 
