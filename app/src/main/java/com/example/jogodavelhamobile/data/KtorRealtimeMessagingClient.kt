@@ -19,7 +19,7 @@ class KtorRealtimeMessagingClient(private val client: HttpClient) : RealTimeMess
     override fun getGameStateStream(): Flow<GameState> {
         return flow {
             session = client.webSocketSession {
-                url("ws://10.0.0.100/play")
+                url("ws://192.168.1.8:8080/play")
             }
             val gameStates = session!!
                 .incoming
